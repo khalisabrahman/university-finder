@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "http://universities.hipolabs.com/search?:match*",
+      "destination": "http://universities.hipolabs.com/search?:match*"
+    }
+  ]
+}
