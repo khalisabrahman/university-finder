@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { IconButton } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const Remark = ({ remark, editRemark, removeRemark, index }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,14 +25,38 @@ const Remark = ({ remark, editRemark, removeRemark, index }) => {
     <div>
       {isEditing ? (
         <div>
-          <input type="text" value={newText} onChange={handleChange} />
-          <button onClick={handleUpdate}>Save</button>
+          <TextField
+            id="outlined-basic"
+            size="small"
+            label="Edit remark"
+            variant="outlined"
+            value={newText}
+            onChange={handleChange}
+          />
+
+          <Button
+            sx={{
+              marginLeft: "8px",
+              backgroundColor: "#333333",
+              color: "#FFF",
+            }}
+            type="submit"
+            variant="contained"
+            onClick={handleUpdate}
+          >
+            Save
+          </Button>
         </div>
       ) : (
         <div>
           {remark.text}
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={() => removeRemark(index)}>Remove</button>
+
+          <IconButton onClick={handleEdit}>
+            <ModeEditIcon />
+          </IconButton>
+          <IconButton onClick={() => removeRemark(index)}>
+            <DeleteForeverIcon color="error"/>
+          </IconButton>
         </div>
       )}
     </div>

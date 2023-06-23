@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
-import { Menu } from "@mui/material";
+
 
 const Searchbar = ({ onSearch }) => {
   const [term, setTerm] = useState("");
@@ -18,14 +18,12 @@ const Searchbar = ({ onSearch }) => {
   }, []);
 
   const fetchCountries = async () => {
-    await axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((res) => {
-        const countriesRes = res.data
-          .map((country) => country.name.common)
-          .sort();
-        setCountries(countriesRes);
-      });
+    await axios.get("https://restcountries.com/v3.1/all").then((res) => {
+      const countriesRes = res.data
+        .map((country) => country.name.common)
+        .sort();
+      setCountries(countriesRes);
+    });
   };
 
   const handleChange = (e) => {
@@ -45,7 +43,12 @@ const Searchbar = ({ onSearch }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}
+      style={{
+        marginTop: "10px",
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
     >
       <TextField
         id="outlined-basic"
@@ -63,7 +66,9 @@ const Searchbar = ({ onSearch }) => {
           onChange={handleCountryChange}
           sx={{ width: "200px" }}
         >
-          <MenuItem value="" key={300}>All countries</MenuItem>
+          <MenuItem value="" key={300}>
+            All countries
+          </MenuItem>
           {countries.map((country, index) => (
             <MenuItem value={country} key={index}>
               {country}
@@ -72,7 +77,11 @@ const Searchbar = ({ onSearch }) => {
         </Select>
       </FormControl>
 
-      <Button type="submit" variant="contained">
+      <Button
+        sx={{ marginLeft: "8px", backgroundColor: "#333333", color: "#FFF" }}
+        type="submit"
+        variant="contained"
+      >
         Search
       </Button>
     </form>

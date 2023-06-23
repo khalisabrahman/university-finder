@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
 import { useEffect, useState, useMemo } from "react";
 import { fetchFromAPI } from "../utils/universityApi.ts";
-import Searchbar from "./Searchbar";
-import SearchItem from "./SearchItem";
+
+import Searchbar from "../components/Searchbar.js";
+import SearchItem from "../components/SearchItem.js";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,6 @@ const Home = () => {
   const [favoriteList, setFavoriteList] = useState([]);
 
   const memoizedFavoriteList = useMemo(() => {
-    console.log('useMemo called')
     const arrStr = JSON.stringify(favoriteList);
 
     return arrStr;
@@ -25,11 +24,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect runs fav");
     const storedData = localStorage.getItem("favoriteList");
     if (storedData) {
       setFavoriteList(JSON.parse(storedData));
-      console.log(favoriteList)
+      console.log(favoriteList);
     }
   }, [memoizedFavoriteList]);
 
@@ -76,7 +74,15 @@ const Home = () => {
   return (
     <div className="App">
       <Searchbar onSearch={onSearch} />
-      {isLoading && <div>Loading.....</div>}
+      {isLoading && (
+        <div class="spinner">
+          <div class="rect1"></div>
+          <div class="rect2"></div>
+          <div class="rect3"></div>
+          <div class="rect4"></div>
+          <div class="rect5"></div>
+        </div>
+      )}
       <div
         style={{
           marginTop: "40px",

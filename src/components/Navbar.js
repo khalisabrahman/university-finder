@@ -17,13 +17,14 @@ const Navbar = () => {
       }}
     >
       <Box display="flex">
-        <SchoolIcon sx={{ mr: "10px" }} /> University Finder
+        <SchoolIcon sx={{ mr: "10px" }} />{" "}
+        <Typography color="#FFF">UniversityFinder</Typography>
       </Box>
       <Box display="flex" sx={{ gap: "10px" }}>
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
           <Typography>Home</Typography>
         </Link>
-        <Link to="/favorites">
+        <Link to="/favorites" style={{ textDecoration: "none", color: "#fff" }}>
           <Typography>Favorites</Typography>
         </Link>
       </Box>

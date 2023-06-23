@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { Typography, Card, CardContent, CardActions } from "@mui/material";
 import Button from "@mui/material/Button";
-
 
 const SearchItem = ({
   name,
@@ -34,6 +33,7 @@ const SearchItem = ({
             size="small"
             variant="contained"
             onClick={handleAddFavorite}
+            color={!favorite ? "primary" : "success"}
           >
             {!favorite ? "Add to favorites" : "Added"}
           </Button>
