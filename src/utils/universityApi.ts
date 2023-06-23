@@ -9,7 +9,7 @@ const BASE_URL: string = "http://universities.hipolabs.com/search?";
 // };
 
 export const fetchFromAPI = async (url) => {
-  const response = await fetch(`/hipo${url}`);
+  const response = await fetch(`${BASE_URL}${url}`);
   const jsonData = await response.json();
   return jsonData;
 };
