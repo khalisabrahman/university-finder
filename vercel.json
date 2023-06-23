@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/hipo:match*", "destination": "http://universities.hipolabs.com/search?:match*" }]
+}
