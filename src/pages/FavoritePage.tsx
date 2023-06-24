@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 
 import FavoriteItem from "../components/FavoriteItem";
 
-const FavoritePage = () => {
+const FavoritePage: React.FC = () => {
   const [favoriteList, setFavoriteList] = useState([]);
 
   const memoizedFavoriteList = useMemo(() => {
@@ -18,7 +18,7 @@ const FavoritePage = () => {
     }
   }, [memoizedFavoriteList]);
 
-  const updateFavoriteList = (updatedList) => {
+  const updateFavoriteList = (updatedList: any) => {
     localStorage.setItem("favoriteList", JSON.stringify(updatedList));
     setFavoriteList(updatedList);
   };
@@ -38,19 +38,24 @@ const FavoritePage = () => {
           marginTop: "40px",
           marginLeft: "10px",
           display: "flex",
-          flexDirection: "column",
           flexWrap: "wrap",
           gap: "10px",
           justifyContent: "center",
         }}
       >
-        {!favoriteList.length && <div>There are no universities added to the Favorite list. Please add a university from the Home page</div>}
+        {!favoriteList.length && (
+          <div>
+            There are no universities added to the Favorite list. Please add a
+            university from the Home page
+          </div>
+        )}
         {favoriteList.length > 0 &&
-          favoriteList.map((favorite) => (
+          favoriteList.map((favorite, index) => (
             <FavoriteItem
               favorite={favorite}
               favoriteList={favoriteList}
               updateFavoriteList={updateFavoriteList}
+              key={index}
             ></FavoriteItem>
           ))}
       </div>

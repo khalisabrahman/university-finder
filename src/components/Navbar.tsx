@@ -2,7 +2,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   return (
     <Stack
       direction="row"

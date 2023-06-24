@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const Remark = ({ remark, editRemark, removeRemark, index }) => {
+import { RemarkInterface } from "../types/types";
+
+const Remark: React.FC<{
+  remark: RemarkInterface;
+  index: number;
+  removeRemark: (index: number) => void;
+  editRemark: (index: number, text: string) => void;
+}> = ({ remark, editRemark, removeRemark, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(remark.text);
 
@@ -13,7 +20,7 @@ const Remark = ({ remark, editRemark, removeRemark, index }) => {
     setIsEditing(true);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewText(event.target.value);
   };
 
@@ -55,7 +62,7 @@ const Remark = ({ remark, editRemark, removeRemark, index }) => {
             <ModeEditIcon />
           </IconButton>
           <IconButton onClick={() => removeRemark(index)}>
-            <DeleteForeverIcon color="error"/>
+            <DeleteForeverIcon color="error" />
           </IconButton>
         </div>
       )}

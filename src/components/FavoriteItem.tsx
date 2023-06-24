@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Typography, Card, CardContent, CardActions } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import Remark from "./Remark";
+import { FavoriteInterface } from "../types/types";
 
-const FavoriteItem = ({ favorite, favoriteList, updateFavoriteList }) => {
+const FavoriteItem: React.FC<{
+  favorite: FavoriteInterface;
+  favoriteList: FavoriteInterface[];
+  updateFavoriteList: (updatedList: FavoriteInterface[]) => void;
+}> = ({ favorite, favoriteList, updateFavoriteList }) => {
   const [remarks, setRemarks] = useState(favorite.remark);
   const [text, setText] = useState("");
-  const date = favorite.dateAdded.slice(0, 10);
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addRemark(text);
     setText("");
   };
 
-  const addRemark = (text) => {
+  const addRemark = (text: string) => {
     if (text) {
       const newRemark = { text };
       setRemarks([...remarks, newRemark]);
@@ -34,7 +38,7 @@ const FavoriteItem = ({ favorite, favoriteList, updateFavoriteList }) => {
     }
   };
 
-  const removeRemark = (index) => {
+  const removeRemark = (index: number) => {
     const updatedRemarks = [...remarks];
     updatedRemarks.splice(index, 1);
     setRemarks(updatedRemarks);
@@ -47,7 +51,7 @@ const FavoriteItem = ({ favorite, favoriteList, updateFavoriteList }) => {
     updateFavoriteList(favoriteList);
   };
 
-  const editRemark = (index, newText) => {
+  const editRemark = (index: number, newText: string) => {
     const updatedRemarks = [...remarks];
     updatedRemarks[index].text = newText;
     setRemarks(updatedRemarks);
@@ -67,7 +71,7 @@ const FavoriteItem = ({ favorite, favoriteList, updateFavoriteList }) => {
           {favorite.name}
         </Typography>
         <Typography>Country: {favorite.country}</Typography>
-        <Typography marginBottom="8px">Date added: {date}</Typography>
+        <Typography marginBottom="8px">Date added: {favorite.dateAdded}</Typography>
         <form onSubmit={handleSubmit} style={{ marginTop: "10px" }}>
           <TextField
             id="outlined-basic"
@@ -81,6 +85,7 @@ const FavoriteItem = ({ favorite, favoriteList, updateFavoriteList }) => {
           <Button
             sx={{
               marginTop: "8px",
+              marginBottom: "8px",
               backgroundColor: "#333333",
               color: "#FFF",
             }}

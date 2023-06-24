@@ -1,26 +1,26 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import { Typography, Card, CardContent, CardActions } from "@mui/material";
 import Button from "@mui/material/Button";
 
-const SearchItem = ({
-  name,
-  country,
-  website,
-  onAddFavorite,
-}) => {
+import { FavoriteInterface } from "../types/types";
+
+const SearchItem: React.FC<{
+  name: string;
+  country: string;
+  website: string[];
+  onAddFavorite: (favorite: FavoriteInterface) => void;
+}> = ({ name, country, website, onAddFavorite }) => {
   const [favorite, setFavorite] = useState(false);
 
   const handleAddFavorite = () => {
     setFavorite(true);
     onAddFavorite({
-        id: uuidv4(),
-        name,
-        country,
-        dateAdded: new Date(),
-        remark: []
-    })
-  }
+      name,
+      country,
+      dateAdded: new Date().toLocaleDateString('en-GB'),
+      remark: [],
+    });
+  };
 
   return (
     <Card sx={{ width: 345 }}>

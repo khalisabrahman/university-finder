@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -7,8 +7,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 
-
-const Searchbar = ({ onSearch }) => {
+const Searchbar: React.FC<{
+  onSearch: (term: string, country: string) => void;
+}> = ({ onSearch }) => {
   const [term, setTerm] = useState("");
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -20,22 +21,22 @@ const Searchbar = ({ onSearch }) => {
   const fetchCountries = async () => {
     await axios.get("https://restcountries.com/v3.1/all").then((res) => {
       const countriesRes = res.data
-        .map((country) => country.name.common)
+        .map((country: any) => country.name.common)
         .sort();
       setCountries(countriesRes);
     });
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
   };
 
-  const handleCountryChange = (event) => {
+  const handleCountryChange = (event: SelectChangeEvent<string>) => {
     setSelectedCountry(event.target.value);
     console.log(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSearch(term, selectedCountry);
   };
@@ -54,7 +55,7 @@ const Searchbar = ({ onSearch }) => {
         id="outlined-basic"
         label="Search for universities"
         variant="outlined"
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
         sx={{ width: "400px" }}
       />
 
